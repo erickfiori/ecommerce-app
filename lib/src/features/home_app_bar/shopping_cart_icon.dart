@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/src/routes/routes.dart';
+import 'package:ecommerce_app/src/features/shopping_cart/shopping_cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/src/constants/app_sizes.dart';
 import 'package:go_router/go_router.dart';
@@ -20,7 +20,7 @@ class ShoppingCartIcon extends StatelessWidget {
           child: IconButton(
             key: shoppingCartIconKey,
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () => context.pushNamed(AppRoutes.cart.name),
+            onPressed: () => GoRouter.of(context).go('/cart'),
           ),
         ),
         if (cartItemsCount > 0)

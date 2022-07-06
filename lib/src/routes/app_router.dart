@@ -3,70 +3,30 @@ import 'package:ecommerce_app/src/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-enum AppRoutes {
-  home,
-  product,
-  review,
-  cart,
-  checkout,
-  orders,
-  account,
-  signIn,
-  notFound,
-}
-
 final router = GoRouter(
   urlPathStrategy: UrlPathStrategy.path,
   initialLocation: '/',
+  debugLogDiagnostics: true,
   routes: [
     GoRoute(
       path: '/',
-      name: AppRoutes.home.name,
+      name: 'products',
       builder: (context, state) => const ProductsListScreen(),
+
       //* Nested Navigation
       routes: [
         GoRoute(
-          name: AppRoutes.product.name,
-          path: 'product/:id',
+          name: 'cart',
+          path: 'cart', //* Dont need '/' before path name when we are using nested navigation/sub-routes
+          //* Page Builder is used to access additional configurations as Transitions, etc
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
-            child: ProductScreen(productId: state.params['id']!),
+            fullscreenDialog: true,
+            child: const ShoppingCartScreen(),
           ),
-          routes: [
-            GoRoute(
-              path: 'review',
-              name: AppRoutes.review.name,
-              pageBuilder: (context, state) => MaterialPage(
-                key: state.pageKey,
-                fullscreenDialog: true,
-                child: LeaveReviewScreen(productId: state.params['id']!),
-              ),
-            ),
-          ],
         ),
         GoRoute(
-            name: AppRoutes.cart.name,
-            //* Dont need '/' before path name when we are using nested navigation/sub-routes
-            path: 'cart',
-            //* Page Builder is used to access additional configurations as Transitions, etc
-            pageBuilder: (context, state) => MaterialPage(
-                  key: state.pageKey,
-                  fullscreenDialog: true,
-                  child: const ShoppingCartScreen(),
-                ),
-            routes: [
-              GoRoute(
-                path: 'checkout',
-                name: AppRoutes.checkout.name,
-                pageBuilder: (context, state) => MaterialPage(
-                  key: state.pageKey,
-                  fullscreenDialog: true,
-                  child: const CheckoutScreen(),
-                ),
-              ),
-            ]),
-        GoRoute(
-          name: AppRoutes.orders.name,
+          name: 'orders',
           path: 'orders',
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
@@ -75,7 +35,7 @@ final router = GoRouter(
           ),
         ),
         GoRoute(
-          name: AppRoutes.account.name,
+          name: 'account',
           path: 'account',
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
@@ -84,7 +44,7 @@ final router = GoRouter(
           ),
         ),
         GoRoute(
-          name: AppRoutes.signIn.name,
+          name: 'signIn',
           path: 'signIn',
           pageBuilder: (context, state) => MaterialPage(
             key: state.pageKey,
@@ -97,8 +57,4 @@ final router = GoRouter(
       ],
     ),
   ],
-  errorPageBuilder: (context, state) => MaterialPage(
-    key: state.pageKey,
-    child: const NotFoundScreen(),
-  ),
 );

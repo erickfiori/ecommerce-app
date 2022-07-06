@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/src/localization/string_hardcoded.dart';
-import 'package:ecommerce_app/src/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/src/models/app_user.dart';
 import 'package:go_router/go_router.dart';
@@ -47,13 +46,13 @@ class MoreMenuButton extends StatelessWidget {
         // push to different routes based on selected option
         switch (option) {
           case PopupMenuOption.signIn:
-            context.pushNamed(AppRoutes.signIn.name);
+            context.go('/signIn');
             break;
           case PopupMenuOption.orders:
-            context.pushNamed(AppRoutes.orders.name);
+            context.go('/orders');
             break;
           case PopupMenuOption.account:
-            context.pushNamed(AppRoutes.account.name);
+            context.go('/account');
             break;
         }
       },

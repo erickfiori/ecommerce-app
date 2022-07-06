@@ -1,7 +1,9 @@
-import 'package:ecommerce_app/src/features/sign_in/email_password_sign_in_state.dart';
 import 'package:ecommerce_app/src/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../features/authentication/presentation/sign_in/email_password_sign_in_screen.dart';
+import '../features/authentication/presentation/sign_in/email_password_sign_in_state.dart';
 
 enum AppRoutes {
   home,
